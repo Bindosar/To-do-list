@@ -1,16 +1,13 @@
 import axios from "axios";
-import { action, makeObservable, observable } from "mobx";
+import { makeAutoObservable } from "mobx";
 
 class TasksStore {
   tasks = [];
 
   constructor() {
-    makeObservable(this, {
-      tasks: observable,
-      createTask: action,
-      fetchTasks: action,
-    });
+    makeAutoObservable(this);
   }
+
   fetchTasks = async () => {
     try {
       const response = await axios.get("http://localhost:8000/tasks");
@@ -24,6 +21,14 @@ class TasksStore {
       const res = await axios.post("http://localhost:8000/tasks", newTask);
       this.tasks.push(res.data);
     } catch (error) {}
+  };
+  DeleteTask = async (taskId) => {
+    try {
+      await axios.delete(`http://localhost:8000/tasks/${taskId}`);
+      this.tasks = this.tasks.filter((task) => task.id !== +taskId);
+    } catch (error) {
+      console.log("tasksStore -> deletetask -> error", error);
+    }
   };
 }
 
