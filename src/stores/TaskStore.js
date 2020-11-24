@@ -1,6 +1,5 @@
-import React from "react";
 import axios from "axios";
-import { makeObservable, observable } from "mobx";
+import { action, makeObservable, observable } from "mobx";
 
 class TasksStore {
   tasks = [];
@@ -8,6 +7,8 @@ class TasksStore {
   constructor() {
     makeObservable(this, {
       tasks: observable,
+      createTask: action,
+      fetchTasks: action,
     });
   }
   fetchTasks = async () => {
@@ -17,6 +18,12 @@ class TasksStore {
     } catch (error) {
       console.error("TasksStore -> fetchTasks -> error", error);
     }
+  };
+  createTask = async (newTask) => {
+    try {
+      const res = await axios.post("http://localhost:8000/tasks", newTask);
+      this.tasks.push(res.data);
+    } catch (error) {}
   };
 }
 

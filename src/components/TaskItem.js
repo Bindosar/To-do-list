@@ -3,7 +3,7 @@ const TaskItem = ({ task }) => {
   return (
     <>
       <p>{task.name}</p>
-      <p>{task.pryority}</p>
+      <p>{task.priority}</p>
     </>
   );
 };
