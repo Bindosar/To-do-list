@@ -30,6 +30,18 @@ class TasksStore {
       console.log("tasksStore -> deletetask -> error", error);
     }
   };
+  updateTask = async (updatedTask) => {
+    try {
+      await axios.put(
+        `http://localhost:8000/tasks/${updatedTask.id}`,
+        updatedTask
+      );
+      const task = this.tasks.find((task) => task.id === updatedTask.id);
+      for (const key in task) task[key] = updatedTask[key];
+    } catch (error) {
+      console.log("TasksStore -> updateTask -> error", error);
+    }
+  };
 }
 
 const tasksStore = new TasksStore();
