@@ -1,4 +1,4 @@
-// import { DeleteButtonStyled } from "../../styles";
+import { DeleteButtonStyled } from "../../styles";
 import taskStore from "../../stores/taskStore";
 
 const DeleteTask = ({ taskId }) => {
