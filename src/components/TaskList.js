@@ -5,6 +5,8 @@ import { observer } from "mobx-react";
 import TodoForm from "./TodoForm";
 
 const TaskList = ({ tasks, createTasks }) => {
+  // const filterdTask =tasksStore. task.filter((done) =>
+  // task.done = false );
   const taskList2 = tasksStore.tasks.map((task) => (
     <TaskItem task={task} key={task.id} />
   ));
